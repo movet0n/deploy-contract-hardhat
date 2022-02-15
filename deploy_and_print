@@ -1,0 +1,21 @@
+#!/bin/bash
+
+CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
+
+npx hardhat clean
+
+# npx hardhat run scripts/deploy.js --network kovan
+
+mapfile -t OUTPUT < <(npx hardhat run scripts/deploy.js --network kovan)
+
+CONTRACT_ADDRESS=($"${OUTPUT[2]}")
+DEPLOYER_ADDRESS=($"${OUTPUT[3]}")
+SET_VALUE=($"${OUTPUT[4]}")
+
+echo "Contract address: $CONTRACT_ADDRESS"
+echo "Deployer address: $DEPLOYER_ADDRESS"
+echo "Set value: $SET_VALUE"
+
+echo "{\"contract_address\":\"${CONTRACT_ADDRESS}\", \
+\"deployer_address\":\"${DEPLOYER_ADDRESS}\", \
+\"set_value\":\"${SET_VALUE}\"}" > contract_data_$CURRENT_TIME.json
