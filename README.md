@@ -1,9 +1,12 @@
 # Basic Sample Hardhat Project
+---
 
 ### Prerequisites: 
+---
  - nvm alias default 16.14.0 should be utilized
 
 ### Implementation and output:
+---
 Run the project by navigating to the root folder and running the `./deploy_and_print` bash file by simply writing into the terminal.
 
 This project demonstrates a basic Hardhat use case. It comes with:
@@ -18,7 +21,7 @@ By running that bash file, the script prints out the:
 Additionally, that scrip creates a .json file that is titled `contract_address_[timestamp]`, which contains the mentioned outputs.
 
 ### To be improved:
-
+---
 1. Security issues related to the private key being set up publicly in configs. In the real-world project all the sensitive data should be substituted by the environment variables, while real private data must be stored outside of the public access (locally for local development or using such tools as Vault, etc.).
 2. Few clauses here:
  - Current implementation works as expected in the Hardhat network, however, in the Kovan Network, the `set value` may be returned as a 0. Periodically I managed to receive the set value in the output. 
