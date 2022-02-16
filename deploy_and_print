@@ -4,8 +4,6 @@ CURRENT_TIME=$(date "+%Y.%m.%d-%H.%M.%S")
 
 npx hardhat clean
 
-# npx hardhat run scripts/deploy.js --network kovan
-
 mapfile -t OUTPUT < <(npx hardhat run scripts/deploy.js --network kovan)
 
 CONTRACT_ADDRESS=($"${OUTPUT[2]}")

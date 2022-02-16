@@ -9,19 +9,34 @@ async function main() {
   await contract.deployed();
   console.log(`${contract.address}`);
 
-
   // Print out the deployer address
   const deployer = await ethers.getSigner();
   console.log(`${deployer.address}`);
 
-
   // Set an uint256 value
-  await contract.setUint256(12345, { gasLimit: 75000, gasPrice: 5 });
-
+  const setValue = 12345;
+  // await contract.setUint256(setValue, { gasLimit: 75000, gasPrice: 5 });
+  await contract.setUint256(setValue);
 
   // Get an uint256 value and print it out
-  const uint256 = await contract.getUint256();
-  console.log(`${uint256}`);
+  const getValue = await contract.getUint256();
+  console.log(`${getValue}`);
+
+  // const waitUntil = (condition) => {
+  //   return new Promise((resolve) => {
+  //     let interval = setInterval(() => {
+  //       if (!condition()) {
+  //         return
+  //       }
+
+  //       clearInterval(interval)
+  //       resolve()
+  //     }, 100)
+  //   })
+  // }
+
+  // await waitUntil(() => getValue == setValue);
+  // console.log(`${getValue}`);
 }
 
 
@@ -31,4 +46,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-
