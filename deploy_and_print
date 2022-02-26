@@ -8,12 +8,18 @@ mapfile -t OUTPUT < <(npx hardhat run scripts/deploy.js --network kovan)
 
 CONTRACT_ADDRESS=($"${OUTPUT[2]}")
 DEPLOYER_ADDRESS=($"${OUTPUT[3]}")
-SET_VALUE=($"${OUTPUT[4]}")
+SET_BYTES32_VAL=($"${OUTPUT[4]}")
+BYTES32_TX=($"${OUTPUT[5]}")
+GET_BYTES32_TX=($"${OUTPUT[6]}")
 
-echo "Contract address: $CONTRACT_ADDRESS"
-echo "Deployer address: $DEPLOYER_ADDRESS"
-echo "Set value: $SET_VALUE"
+echo "$CONTRACT_ADDRESS"
+echo "$DEPLOYER_ADDRESS"
+echo "$SET_BYTES32_VAL"
+echo "$GET_BYTES32_TX"
+echo "$BYTES32_TX"
 
-echo "{\"contract_address\":\"${CONTRACT_ADDRESS}\", \
-\"deployer_address\":\"${DEPLOYER_ADDRESS}\", \
-\"set_value\":\"${SET_VALUE}\"}" > contract_data_$CURRENT_TIME.json
+echo "{\"contract_address\":\"${CONTRACT_ADDRESS: -42:42}\", \
+\"deployer_address\":\"${DEPLOYER_ADDRESS: -42:42}\", \
+\"set_bytes32_value\":\"${SET_BYTES32_VAL: -66:66}\", \
+\"get_bytes32_value\":\"${GET_BYTES32_TX: -66:66}\", \
+\"bytes32_tx\":\"${BYTES32_TX: -66:66}\"}" > contract_data_$CURRENT_TIME.json

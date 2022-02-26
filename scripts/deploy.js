@@ -3,40 +3,23 @@ const { ethers } = require('hardhat');
 
 async function main() {
 
-  // Deploy contract and print out its address
   const GetterSetter = await ethers.getContractFactory("GetterSetter");
   const contract = await GetterSetter.deploy();
   await contract.deployed();
-  console.log(`${contract.address}`);
+  console.log(`Contract address: ${contract.address}`);
 
-  // Print out the deployer address
   const deployer = await ethers.getSigner();
-  console.log(`${deployer.address}`);
+  console.log(`Deployer address: ${deployer.address}`);
 
-  // Set an uint256 value
-  const setValue = 12345;
-  // await contract.setUint256(setValue, { gasLimit: 75000, gasPrice: 5 });
-  await contract.setUint256(setValue);
+  const bytes32Val = "0x0000000000000000000000000000000000000000000000000000000000013579";
+  const setBytes32Tx = await contract.setBytes32(bytes32Val);
+  console.log("GetterSetter setBytes32 set to:", bytes32Val);
+  console.log("GetterSetter setBytes32 transaction hash is:", await setBytes32Tx.hash);
+  await setBytes32Tx.wait();
 
-  // Get an uint256 value and print it out
-  const getValue = await contract.getUint256();
-  console.log(`${getValue}`);
+  const getBytes32Tx = await contract.getBytes32();
+  console.log(`GetterSetter setBytes32 get value: ${getBytes32Tx}`);
 
-  // const waitUntil = (condition) => {
-  //   return new Promise((resolve) => {
-  //     let interval = setInterval(() => {
-  //       if (!condition()) {
-  //         return
-  //       }
-
-  //       clearInterval(interval)
-  //       resolve()
-  //     }, 100)
-  //   })
-  // }
-
-  // await waitUntil(() => getValue == setValue);
-  // console.log(`${getValue}`);
 }
 
 
